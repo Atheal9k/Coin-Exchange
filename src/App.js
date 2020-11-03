@@ -1,46 +1,70 @@
-import './App.css';
+
 import React from 'react';
-import logo from './logo.svg';
-import Coin from './components/Coin/Coin';
+import styled from 'styled-components';
+import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance'
+import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 
 
-function App(){
-  return(
-    
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} alt='React logo' className="App-logo"/>
-        <h1 className="App-title">
-          Coin Exchange
-        </h1>
-      </header>
-      <AccountBalance amount={10000}/>
-      <table className="coin-table">
-        <thead>
+const Div = styled.div`
+    text-align: center;
+    background-color: rgb(58, 58, 163);
+    color: #cccccc;
+`
+
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      balance: 10000,
+      coinData: [
+        {
+          
+          name: 'Bitcoin',
+          ticker: 'BTC',
+          price: 9999
+
+        },
+
+        {
+          name: 'Ethereum',
+          ticker: 'ETH',
+          price: 300
+
+        },{
+          name: 'Tether',
+          ticker: 'USDT',
+          price: 1
+
+        },{
+          name: 'Ripple',
+          ticker: 'XRP',
+          price: 0.2
+
+        }
+
         
-          <tr>
-            
-            
-            <th>Name</th>
-            <th>Ticker</th>
-            <th>Price</th>
-            </tr>
-           
-          </thead>
-          <tbody>
-            
-            <Coin name="Bitcoin" ticker="BTC" price={9999} />
-            <Coin name="Ethereum" ticker="ETH" price={300} />
-            <Coin name="Tether" ticker="USDT" price={1} />
-            <Coin name="Ripple" ticker="XRP" price={0.2} />
-            </tbody>
-        </table>
-       
-      </div>
-      
+      ]
+    }
+  }
 
-  );
+
+  render() {
+    return(
+    <Div className='App'>
+   
+    <ExchangeHeader/>
+    <AccountBalance amount={this.state.balance}/>
+    <CoinList coinData={this.state.coinData}/>
+    
+     
+      </Div>
+    
+    )
+
+  }
+    
+   
 
 
 }
